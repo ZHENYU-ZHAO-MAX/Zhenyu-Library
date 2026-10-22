@@ -1,15 +1,127 @@
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const isAuthenticated = computed(() =>
+  localStorage.getItem('isAuthenticated')
+)
+
+const logout = () => {
+  localStorage.removeItem('isAuthenticated')
+  router.push('/login')
+
+  window.location.reload()
+}
+</script>
+
 <template>
   <!-- Using Bootstrap's Header template (starter code) -->
   <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
   <div class="container">
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">Home (Week 4)</a>
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
-      </ul>
+
+  <li class="nav-item">
+    <router-link
+      to="/"
+      class="nav-link"
+      active-class="active"
+    >
+      Home (Week 5)
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link
+      to="/bookcount"
+      class="nav-link"
+      active-class="active"
+    >
+      Book Counter
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link
+      to="/WeatherCheck"
+      class="nav-link"
+      active-class="active"
+    >
+      Get Weather
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link
+      to="/CountBookAPI"
+      class="nav-link"
+      active-class="active"
+    >
+      Book API
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link
+      to="/about"
+      class="nav-link"
+      active-class="active"
+    >
+      About
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link
+      to="/FireRegister"
+      class="nav-link"
+      active-class="active"
+    >
+      Register
+    </router-link>
+  </li>
+
+  <li
+    class="nav-item"
+    v-if="!isAuthenticated"
+  >
+    <router-link
+      to="/login"
+      class="nav-link"
+      active-class="active"
+    >
+      Login
+    </router-link>
+  </li>
+
+  <li
+    class="nav-item"
+    v-if="!isAuthenticated"
+  >
+    <router-link
+      to="/Firelogin"
+      class="nav-link"
+      active-class="active"
+    >
+      Firebase Login
+    </router-link>
+  </li>
+
+  <li
+    class="nav-item"
+    v-else
+  >
+    <button
+      class="btn btn-danger ms-2"
+      @click="logout"
+    >
+      Logout
+    </button>
+  </li>
+
+</ul>
     </header>
   </div>
 </template>
